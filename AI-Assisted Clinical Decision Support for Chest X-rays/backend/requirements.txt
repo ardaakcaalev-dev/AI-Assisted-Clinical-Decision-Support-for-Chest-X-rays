@@ -1,0 +1,30 @@
+# Web API
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+pydantic[email]>=2.6
+python-dotenv>=1.0
+
+# Database
+sqlalchemy>=2.0
+psycopg[binary]>=3.1
+
+# Auth (bcrypt 5 is incompatible with passlib 1.7.4)
+passlib>=1.7.4
+bcrypt==4.0.1
+python-jose[cryptography]>=3.3
+
+# AI: DenseNet121 + ViT inference, Grad-CAM, Gemini reports
+torch>=2.1
+torchvision>=0.16
+transformers>=4.40
+opencv-python-headless>=4.8
+numpy>=1.24
+pillow>=10.0
+google-generativeai>=0.5
+
+# Demo data and tests
+faker>=24.0
+requests>=2.31
+pytest>=8.0
+httpx>=0.27

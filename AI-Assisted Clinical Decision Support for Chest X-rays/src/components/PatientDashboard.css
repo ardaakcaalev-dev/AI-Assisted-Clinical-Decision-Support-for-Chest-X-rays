@@ -1,0 +1,1268 @@
+/* ==========================================================================
+   PatientDashboard.css - Premium Dark Minimalist Interface (Linear/Vercel inspired)
+   ========================================================================== */
+
+/* Dark charcoal neutral palette override for the dashboard context */
+.dashboard-layout {
+  --bg-dashboard: transparent;       /* Let body gradient and glows show through! */
+  --bg-card: var(--card-bg);            /* Glassmorphic card background from index.css */
+  --bg-card-hover: rgba(255, 255, 255, 0.04); /* Lighter card hover overlay */
+  --border-color: var(--card-border); /* Glassmorphic card border */
+  --border-focus: var(--input-focus);       /* Teal focus highlight */
+  
+  --color-text-primary: var(--text-main); /* slate-50 / slate-900 dynamic */
+  --color-text-secondary: var(--text-muted); /* slate-300 / slate-600 dynamic */
+  --color-text-muted: var(--text-light);   /* slate-500 / slate-400 dynamic */
+  
+  --accent-color: var(--primary);       /* Emerald/Teal primary accent */
+  --accent-muted: var(--primary-light);
+  
+  --radius-rounded: var(--radius-sm);   /* Matching auth card rounded corners (12px) */
+  --radius-pill: 9999px;
+  
+  background: var(--bg-dashboard);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  z-index: 10;
+}
+
+/* Sticky top navigation bar */
+.dashboard-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 40px;
+  background-color: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+  width: 32px;
+  height: 32px;
+  background: var(--accent-muted);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-rounded);
+}
+
+.nav-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+}
+
+/* Nav links - Understated tabs */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border-color);
+  padding: 4px;
+  border-radius: var(--radius-rounded);
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-radius: calc(var(--radius-rounded) - 2px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link svg {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent-color);
+  background: var(--accent-muted);
+}
+
+.nav-link.active {
+  color: #ffffff !important;
+  background: var(--accent-color);
+  font-weight: 600;
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.nav-link.active svg {
+  color: #ffffff !important;
+  opacity: 1;
+}
+
+/* User Profile Badge & Logout */
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 12px;
+  border-radius: var(--radius-rounded);
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.user-profile:hover {
+  background: var(--accent-muted);
+}
+
+.profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-color);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid var(--border-color);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.user-welcome {
+  font-size: 11px;
+  color: #475569 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a !important;
+}
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--color-text-secondary);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--radius-rounded);
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+/* Dashboard main container */
+.dashboard-main {
+  flex-grow: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Welcome banner */
+.welcome-banner {
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 24px;
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+}
+
+.welcome-subtitle {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.dashboard-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+/* Premium Vercel-like Card base */
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-rounded);
+  padding: 32px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Quick Actions Grid */
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+}
+
+.action-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  cursor: pointer;
+}
+
+.action-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-rounded);
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: all 0.2s ease;
+}
+
+.action-card:hover .action-icon {
+  background: var(--accent-color) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.action-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary) !important;
+  margin-bottom: 6px;
+}
+
+.action-desc {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Appointment Card specific styles */
+.appointment-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 32px;
+}
+
+@media (max-width: 640px) {
+  .appointment-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.appt-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.doctor-avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appt-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.appt-doctor {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.appt-specialty {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+.appt-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-top: 6px;
+}
+
+.appt-time svg {
+  opacity: 0.7;
+}
+
+.appt-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* Button Micro styling */
+.btn-micro {
+  background: var(--accent-muted);
+  border: 1px solid var(--border-color);
+  color: var(--color-text-primary);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: var(--radius-rounded);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-micro:hover {
+  background: var(--accent-color);
+  color: #ffffff !important;
+  border-color: var(--accent-color);
+  box-shadow: 0 2px 6px var(--primary-glow);
+}
+
+.btn-micro svg {
+  opacity: 0.8;
+}
+
+.btn-micro:hover svg {
+  color: #ffffff !important;
+}
+
+/* Badge tags */
+.visit-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-rounded);
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--border-color);
+}
+
+/* Recent Activity List */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.activity-item {
+  display: flex;
+  gap: 16px;
+  text-align: left;
+}
+
+.activity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-text-muted);
+  margin-top: 6px;
+  flex-shrink: 0;
+  border: 2px solid var(--bg-card);
+  outline: 1px solid var(--border-color);
+}
+
+.activity-desc {
+  font-size: 13px;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+.activity-time {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+  display: block;
+}
+
+/* Health Metrics styling */
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+}
+
+.metric-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  border-radius: var(--radius-rounded);
+  text-align: left;
+}
+
+.metric-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.metric-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-text-primary) !important;
+  display: block;
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+
+.metric-sub {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  display: block;
+}
+
+/* Visit List */
+.visit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.visit-card {
+  padding: 24px;
+  border-left: none !important; /* Force strip colorful border-lefts */
+}
+
+.visit-header {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.hospital-icon-circle {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: var(--radius-rounded) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.visit-details {
+  text-align: left;
+}
+
+.visit-hospital {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.visit-doctor {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.visit-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.visit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Dedicated Grid for Radiology and Laboratory full-pages */
+.radiology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.radiology-card {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-top: none !important; /* Force strip any top highlights */
+}
+
+.radiology-banner-preview {
+  height: 140px;
+  background: #000000 !important; /* Always dark scanner viewport */
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radiology-modality-badge,
+.radiology-body-part-badge {
+  position: absolute;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: var(--radius-rounded);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.radiology-modality-badge {
+  top: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff;
+}
+
+.radiology-body-part-badge {
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--color-text-secondary);
+}
+
+.radiology-card-body {
+  padding: 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.radiology-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.radiology-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.radiology-card-meta span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.radiology-card-meta svg {
+  color: var(--color-text-muted);
+}
+
+.radiology-card-footer {
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.01);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 12px;
+}
+
+/* Button UI system */
+.btn-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-color) !important; /* Teal primary background */
+  color: #ffffff !important;
+  border: 1px solid var(--accent-color);
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: var(--radius-rounded);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px var(--primary-glow) !important;
+}
+
+.btn-save:hover {
+  background: var(--primary-hover) !important;
+  border-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px var(--primary-glow) !important;
+}
+
+.btn-save:active {
+  transform: translateY(0);
+}
+
+.btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--color-text-primary) !important;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: var(--radius-rounded);
+  transition: all 0.2s ease;
+  box-shadow: none !important;
+}
+
+.btn-cancel:hover {
+  background: var(--accent-muted) !important;
+  border-color: var(--accent-color) !important;
+  color: var(--accent-color) !important;
+}
+
+/* Form Styles */
+.profile-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.profile-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.profile-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-section-title svg {
+  color: var(--color-text-secondary) !important;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.age-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--radius-rounded);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--color-text-primary);
+}
+
+.form-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-rounded) !important;
+  color: var(--color-text-primary) !important;
+  padding: 10px 14px 10px 38px !important;
+  font-size: 13.5px !important;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: #ffffff !important;
+  box-shadow: 0 0 0 1px #ffffff !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.form-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-input-help {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+.profile-footer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Search input specific */
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--color-text-muted) !important;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   PACS DICOM VIEWER / WORKSTATION POPUP - Premium Slate theme
+   ========================================================================== */
+.dicom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.45); /* Translucent overlay to see ambient glows */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  z-index: 1000;
+}
+
+.dicom-modal {
+  width: 100%;
+  max-width: 1000px;
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-rounded);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+.dicom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background-color: rgba(255, 255, 255, 0.01);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dicom-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dicom-brand svg {
+  stroke: #ffffff !important; /* Force clinical white highlights */
+}
+
+.dicom-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+}
+
+.dicom-logo-badge {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #ffffff !important;
+  border-radius: var(--radius-rounded);
+  border: 1px solid var(--border-color);
+}
+
+.dicom-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: var(--radius-rounded);
+  transition: all 0.2s ease;
+}
+
+.dicom-close-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dicom-body {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow: hidden;
+  min-height: 480px;
+}
+
+@media (max-width: 768px) {
+  .dicom-body {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+}
+
+/* DICOM Sidebar */
+.dicom-sidebar {
+  width: 280px;
+  background-color: rgba(255, 255, 255, 0.01);
+  border-right: 1px solid var(--border-color);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-align: left;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .dicom-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+.dicom-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.dicom-meta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dicom-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dicom-meta-label {
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+.dicom-meta-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.dicom-report-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-rounded);
+  padding: 14px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+/* DICOM Viewport Container */
+.dicom-viewport-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #000000;
+  position: relative;
+  overflow: hidden;
+}
+
+.dicom-viewport {
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Precision Scanner Elements */
+.dicom-grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center center;
+  pointer-events: none;
+}
+
+.dicom-crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.dicom-crosshair::before,
+.dicom-crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dicom-crosshair::before {
+  top: 19px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+}
+
+.dicom-crosshair::after {
+  top: 0;
+  left: 19px;
+  width: 2px;
+  height: 40px;
+}
+
+.dicom-laser-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  animation: scanning 4s linear infinite;
+}
+
+@keyframes scanning {
+  0% { top: 0%; }
+  50% { top: 100%; }
+  100% { top: 0%; }
+}
+
+/* Corner HUD styling */
+.dicom-hud-info {
+  position: absolute;
+  font-family: monospace;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.5;
+  pointer-events: none;
+  text-align: left;
+}
+
+.dicom-hud-tl { top: 16px; left: 16px; }
+.dicom-hud-tr { top: 16px; right: 16px; text-align: right; }
+.dicom-hud-bl { bottom: 16px; left: 16px; }
+.dicom-hud-br { bottom: 16px; right: 16px; text-align: right; }
+
+.dicom-canvas {
+  width: 240px;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dicom-canvas svg {
+  width: 100%;
+  height: 100%;
+  stroke: #ffffff !important; /* Force sharp monochrome graphic color overrides */
+}
+
+/* PACS Control Sliders & Tools */
+.dicom-controls-bar {
+  background-color: rgba(255, 255, 255, 0.01);
+  border-top: 1px solid var(--border-color);
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dicom-sliders {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.dicom-slider-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.dicom-slider-group svg {
+  color: var(--color-text-muted);
+}
+
+.dicom-slider {
+  flex-grow: 1;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  accent-color: #ffffff; /* Monochrome sliders */
+  cursor: pointer;
+}
+
+.dicom-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-dicom-tool {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--color-text-secondary);
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--radius-rounded);
+  transition: all 0.2s ease;
+}
+
+.btn-dicom-tool:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.btn-dicom-tool.active {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+/* ==========================================================================
+   LAB RESULTS TABLE - Vercel / Linear inspired minimal table design
+   ========================================================================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+thead tr {
+  background: rgba(255, 255, 255, 0.01) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+th {
+  padding: 16px 24px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--color-text-muted) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border-color) !important;
+  transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+td {
+  padding: 16px 24px !important;
+  font-size: 13.5px !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Simple high/low indicator styling with zero clinical clutter */
+td span {
+  display: inline-flex !important;
+  padding: 2px 8px !important;
+  border-radius: var(--radius-rounded) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  border: 1px solid var(--border-color);
+  background: rgba(255,255,255,0.03) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+/* Toast Message */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background-color: #ffffff !important; /* Monochromatic high contrast toast */
+  color: #000000 !important;
+  padding: 12px 20px;
+  border-radius: var(--radius-rounded);
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 1100;
+  animation: slide-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast svg {
+  color: #000000 !important;
+}
